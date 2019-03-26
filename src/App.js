@@ -1,28 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from 'react-redux'
+import { increment, decrement, helloSaga, incrementAsync } from './actions'
 import './App.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <p>your number :{' '}{this.props.count}</p>
+
+        <div className='btnDiv'>
+
+          <button onClick={this.props.increment}>Increment</button>
+          {' '}
+          <button onClick={this.props.decrement}>Decrement</button>
+          {' '}
+          <button onClick={this.props.incrementAsync}>incrementAsync</button>
+          {' '}
+          <button onClick={this.props.helloSaga}>helloSaga</button>
+        </div>
+
       </div>
     );
   }
 }
 
-export default App;
+export default connect(store => ({
+  count: store.count
+}), {increment, decrement, incrementAsync, helloSaga})(App)
