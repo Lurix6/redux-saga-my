@@ -1,11 +1,32 @@
-export default (count = 0, action) => {
-  const {type, data} = action
-  console.log(data)
-  switch (type) {
-    case 'INCREMENT': return count + 1;
-    case 'DECREMENT': return count - 1;
+const initiaState = {
+  url: '',
+  loading: false,
+  error: false
+};
 
-    default: return count
+export default (state = initiaState, action) => {
+  switch (action.type) {
+    case 'REQUESTED_DOG':
+      return {
+          url: '',
+          loading: true,
+          error: false,
+      };
+    case 'REQUESTED_DOG_SUCCEEDED':
+      return {
+          url: action.url,
+          loading: false,
+          error: false,
+      };
+    case 'REQUESTED_DOG_FAILD':
+      return {
+        url: '',
+        loading: false,
+        error: true,
+      };
+
+    default:
+    return state
 
   }
 }

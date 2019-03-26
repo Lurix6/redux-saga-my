@@ -1,30 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { increment, decrement, helloSaga, incrementAsync } from './actions'
+import { fetchDog } from './actions'
 import './App.css';
 
 class App extends Component {
   render() {
+
+    console.log(this.props)
+
     return (
-      <div className="App">
-        <p>your number :{' '}{this.props.count}</p>
-
-        <div className='btnDiv'>
-
-          <button onClick={this.props.increment}>Increment</button>
-          {' '}
-          <button onClick={this.props.decrement}>Decrement</button>
-          {' '}
-          <button onClick={this.props.incrementAsync}>incrementAsync</button>
-          {' '}
-          <button onClick={this.props.helloSaga}>helloSaga</button>
-        </div>
-
-      </div>
+      <div>
+       <button onClick={this.props.fetchDog}>Show Dog</button>
+         {this.props.store.loading
+           ? <p>Loading...</p>
+           : this.props.store.error
+               ? <p>Error, try again</p>
+               : <p><img alt="dog" src={this.props.store.url}/></p>}
+     </div>
     );
   }
 }
 
 export default connect(store => ({
-  count: store.count
-}), {increment, decrement, incrementAsync, helloSaga})(App)
+    store: store.state
+}), { fetchDog })(App)

@@ -1,25 +1,26 @@
-export function increment() {
+export function requestDog() {
   return {
-    type: 'INCREMENT'
+    type: 'REQUESTED_DOG'
   };
 }
 
 
-export function decrement() {
+export function requestDogSuccess(data) {
   return {
-    type: 'DECREMENT'
+    type: 'REQUESTED_DOG_SUCCEEDED',
+    url: data.message
   };
 }
 
 
-export function incrementAsync() {
+export function requestDogError() {
   return {
-    type:'INCREMENT_ASYNC'
+    type:'REQUESTED_DOG_FAILD'
   }
 }
 
-export function helloSaga() {
+export function fetchDog() {
   return {
-    type: 'HELO_SAGA'
+    type: 'FETCHED_DOG'
   }
 }
